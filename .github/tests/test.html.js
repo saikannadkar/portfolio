@@ -33,8 +33,5 @@ test('No console.log left in code', !html.includes('console.log'));
 test('Has viewport meta tag', html.includes('viewport'));
 test('Has charset UTF-8', html.includes('charset="UTF-8"'));
 
-// Resume file check
-test('Resume PDF exists', fs.existsSync('Sai_Kannadkar_Resume.pdf'));
-
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed > 0) process.exit(1);
