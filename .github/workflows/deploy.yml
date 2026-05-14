@@ -43,6 +43,8 @@ jobs:
             git clone https://github.com/saikannadkar/portfolio.git portfolio_temp 2>/dev/null || \
             (cd portfolio_temp && git pull)
             sudo cp /tmp/portfolio_temp/index.html /var/www/portfolio/index.html
-            sudo chown www-data:www-data /var/www/portfolio/index.html
+            sudo cp /tmp/portfolio_temp/style.css /var/www/portfolio/style.css
+            sudo cp /tmp/portfolio_temp/main.js /var/www/portfolio/main.js
+            sudo chown www-data:www-data /var/www/portfolio/index.html /var/www/portfolio/style.css /var/www/portfolio/main.js
             rm -rf /tmp/portfolio_temp
             echo "Deployed successfully"
