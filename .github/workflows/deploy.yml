@@ -20,13 +20,16 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Run tests
+      - name: Validate JavaScript
+        run: node --check main.js
+
+      - name: Run portfolio tests
         run: node .github/tests/test.html.js
 
   deploy:
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -40,8 +43,8 @@ jobs:
           port: 2222
           script: |
             cd /tmp
-            git clone https://github.com/saikannadkar/portfolio.git portfolio_temp 2>/dev/null || \
-            (cd portfolio_temp && git pull)
+            rm -rf portfolio_temp
+            git clone --depth 1 https://github.com/saikannadkar/portfolio.git portfolio_temp
             sudo cp /tmp/portfolio_temp/index.html /var/www/portfolio/index.html
             sudo cp /tmp/portfolio_temp/style.css /var/www/portfolio/style.css
             sudo cp /tmp/portfolio_temp/main.js /var/www/portfolio/main.js

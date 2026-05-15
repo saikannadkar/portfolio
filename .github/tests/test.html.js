@@ -1,52 +1,64 @@
 const fs = require('fs');
 
 const html = fs.readFileSync('index.html', 'utf-8');
+const css = fs.readFileSync('style.css', 'utf-8');
+const js = fs.readFileSync('main.js', 'utf-8');
 let passed = 0;
 let failed = 0;
 
 function test(name, condition) {
   if (condition) {
-    console.log(`✅ ${name}`);
+    console.log(`PASS ${name}`);
     passed++;
   } else {
-    console.error(`❌ ${name}`);
+    console.error(`FAIL ${name}`);
     failed++;
   }
 }
 
-// Content checks
-test('Contains name', html.includes('Sai Kannadkar'));
-test('Has hero section', html.includes('hero'));
-test('Has about section', html.includes('id="about"'));
-test('Has experience section', html.includes('id="experience"'));
-test('Has projects section', html.includes('id="projects"'));
-test('Has skills section', html.includes('id="skills"'));
-test('Has contact section', html.includes('id="contact"'));
-test('Has resume download link', html.includes('Sai_Kannadkar_Resume.pdf'));
-test('Has GitHub link', html.includes('github.com/saikannadkar'));
-test('Has LinkedIn link', html.includes('linkedin.com/in/saikannadkar'));
-test('Has email link', html.includes('saikannadkar@gmail.com'));
-test('Has n8n link', html.includes('n8n.saikannadkar.me'));
-test('Has dark mode toggle', html.includes('themeBtn'));
-test('Has typing animation', html.includes('typed'));
-test('No console.log left in code', !html.includes('console.log'));
-test('Has viewport meta tag', html.includes('viewport'));
-test('Has charset UTF-8', html.includes('charset="UTF-8"'));
+// Primary file wiring
+test('index.html exists', fs.existsSync('index.html'));
+test('style.css exists', fs.existsSync('style.css'));
+test('main.js exists', fs.existsSync('main.js'));
+test('does not keep beta html file', !fs.existsSync('beta.html'));
+test('does not keep beta css file', !fs.existsSync('beta.css'));
+test('does not keep beta js file', !fs.existsSync('beta.js'));
+test('links to style.css', html.includes('href="style.css"'));
+test('loads main.js', html.includes('src="main.js"'));
+test('does not reference beta assets', !/beta\.(html|css|js)/.test(html));
 
-// External file checks
-test('Links to style.css', html.includes('href="style.css"'));
-test('Links to main.js', html.includes('src="main.js"'));
-test('style.css file exists', fs.existsSync('style.css'));
-test('main.js file exists', fs.existsSync('main.js'));
+// Required document basics
+test('has viewport meta tag', html.includes('name="viewport"'));
+test('has charset UTF-8', html.includes('charset="UTF-8"'));
+test('has portfolio title', html.includes('<title>Sai Kannadkar</title>'));
+test('contains name', html.includes('Sai Kannadkar'));
 
-// Verify external files contain expected content
-const css = fs.readFileSync('style.css', 'utf-8');
-const js = fs.readFileSync('main.js', 'utf-8');
+// Portfolio content
+test('has hero section', html.includes('class="hero section-shell"'));
+test('has about section', html.includes('id="about"'));
+test('has experience section', html.includes('id="experience"'));
+test('has projects section', html.includes('id="projects"'));
+test('has skills section', html.includes('id="skills"'));
+test('has contact section', html.includes('id="contact"'));
+test('has resume download link', html.includes('Sai_Kannadkar_Resume.pdf'));
+test('has GitHub link', html.includes('github.com/saikannadkar'));
+test('has LinkedIn link', html.includes('linkedin.com/in/saikannadkar'));
+test('has email link', html.includes('saikannadkar@gmail.com'));
+test('has n8n link', html.includes('n8n.saikannadkar.me'));
+
+// Current interaction model
+test('has canvas field background', html.includes('id="field"'));
+test('has typed text target', html.includes('id="typedText"'));
+test('main.js has typing animation', js.includes('function typeLoop()'));
+test('main.js has reveal observer', js.includes('IntersectionObserver'));
+test('main.js has canvas animation', js.includes('function drawField()'));
+test('main.js honors reduced motion', js.includes('prefers-reduced-motion'));
+
+// Styling expectations
 test('style.css has CSS variables', css.includes('--bg:'));
 test('style.css has responsive media query', css.includes('@media'));
-test('main.js has theme toggle logic', js.includes('themeBtn'));
-test('main.js has typing animation', js.includes('phrases'));
-test('main.js has scroll observer', js.includes('IntersectionObserver'));
+test('style.css styles hero layout', css.includes('.hero'));
+test('style.css styles contact links', css.includes('.contact-links'));
 
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed > 0) process.exit(1);

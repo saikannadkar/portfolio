@@ -1,211 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sai Kannadkar</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sai Kannadkar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
- 
-<nav>
-  <a href="#" class="nav-logo">Sai Kannadkar</a>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">○</button>
-  </div>
-</nav>
- 
-<section class="hero">
-  <div class="hero-top">
-    <span class="hero-location">Nashik, India · CSE '27</span>
-    <span class="hero-status"><span class="status-dot"></span>Open to opportunities</span>
-  </div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">Backend Developer — Systems Thinking</div>
-    <h1>Sai<br><em>Kannadkar</em></h1>
-    <div class="typing-line"><span id="typed"></span><span class="cursor"></span></div>
-    <div class="hero-bottom">
-      <div class="hero-actions">
-        <a href="#contact" class="btn btn-dark">Get in touch →</a>
-        <a href="/Sai_Kannadkar_Resume.pdf" download class="btn btn-outline">Resume ↓</a>
-        <a href="https://n8n.saikannadkar.me" target="_blank" class="btn btn-outline">n8n ↗</a>
-      </div>
-      <div class="hero-scroll">Scroll</div>
-    </div>
-  </div>
-</section>
- 
-<hr class="h-line">
- 
-<section class="section" id="about">
-  <div class="section-header fade-in">
-    <span class="section-num">01</span>
-    <h2>About</h2>
-  </div>
-  <div class="about-grid">
-    <div class="about-text fade-in">
-      <p>I'm a <strong>Computer Science student</strong> at Sandip University, Nashik, focused on backend systems, clean architecture, and autonomous systems.</p>
-      <p>I care about building things that <strong>actually work</strong> — production-grade, maintainable, and well-thought-out. From drone mission frameworks to self-hosted infrastructure, I prefer to understand systems deeply rather than skim the surface.</p>
-      <p>Beyond code, I lead communities, organize large-scale technical events, and build <strong>automation pipelines</strong> that save real time for real people.</p>
-    </div>
-    <div class="about-stats fade-in">
-      <div class="stat-row"><span class="stat-label">Students reached</span><span class="stat-value">1,000+</span></div>
-      <div class="stat-row"><span class="stat-label">Hackathon participants</span><span class="stat-value">1,500+</span></div>
-      <div class="stat-row"><span class="stat-label">Performance improvement</span><span class="stat-value">40%</span></div>
-      <div class="stat-row"><span class="stat-label">Graduating</span><span class="stat-value">2027</span></div>
-      <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value" style="font-family:var(--mono);font-size:.9rem;">Nashik, IN</span></div>
-    </div>
-  </div>
-</section>
- 
-<div class="section-full" id="experience">
-  <div class="section-inner">
-    <div class="section-header fade-in"><span class="section-num">02</span><h2>Experience</h2></div>
-    <div class="exp-list fade-in">
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-date">Dec 2025 — Present</div>
-          <div class="exp-company">Voxel Networks</div>
-        </div>
-        <div class="exp-right">
-          <div class="exp-role">Core Team — Founder's Office</div>
-          <ul class="exp-bullets">
-            <li>Led execution of operations and marketing initiatives improving engagement and outreach</li>
-            <li>Built and optimized internal workflows for faster execution and team coordination</li>
-          </ul>
+  <canvas id="field" aria-hidden="true"></canvas>
+
+  <header class="site-nav">
+    <a href="#top" class="brand" aria-label="Sai Kannadkar portfolio home">
+      <span class="brand-mark">SK</span>
+      <span>Sai Kannadkar</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero section-shell">
+      <div class="hero-copy">
+        <p class="kicker reveal">Backend Developer / Systems Thinker</p>
+        <h1 class="headline reveal" aria-label="Sai Kannadkar">
+          <span>Sai</span>
+          <span>Kannadkar</span>
+        </h1>
+        <p class="type-line reveal">
+          <span id="typedText"></span><span class="type-caret" aria-hidden="true"></span>
+        </p>
+        <div class="hero-actions reveal">
+          <a class="primary-btn" href="#contact">Get in touch</a>
+          <a class="ghost-btn" href="/Sai_Kannadkar_Resume.pdf" download>Resume</a>
+          <a class="ghost-btn" href="https://n8n.saikannadkar.me" target="_blank" rel="noreferrer">n8n</a>
         </div>
       </div>
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-date">Mar 2025 — Present</div>
-          <div class="exp-company">SECT India</div>
+
+      <aside class="signal-panel reveal" aria-label="Profile highlights">
+        <div class="panel-top">
+          <span>Profile</span>
+          <span class="status"><span></span>Open</span>
         </div>
-        <div class="exp-right">
-          <div class="exp-role">Community Lead & Organizer</div>
-          <ul class="exp-bullets">
-            <li>Scaled community engagement through events and initiatives reaching 1000+ students</li>
-            <li>Organized and managed large-scale technical events and hackathons</li>
-          </ul>
+        <div class="metric-grid">
+          <div>
+            <strong>1,000+</strong>
+            <span>students reached</span>
+          </div>
+          <div>
+            <strong>1,500+</strong>
+            <span>hackathon participants</span>
+          </div>
+          <div>
+            <strong>40%</strong>
+            <span>performance improvement</span>
+          </div>
+          <div>
+            <strong>2027</strong>
+            <span>graduating</span>
+          </div>
         </div>
+        <div class="mini-terminal" aria-label="Current focus">
+          <span>Focus</span>
+          <p id="terminalText">clean architecture, backend systems, autonomous workflows</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section-shell split-section" id="about">
+      <div class="section-label reveal">
+        <span>01</span>
+        <h2>About</h2>
       </div>
-      <div class="exp-item">
-        <div class="exp-left">
-          <div class="exp-date">May 2025</div>
-          <div class="exp-company">Sandip University</div>
-        </div>
-        <div class="exp-right">
-          <div class="exp-role">Training & Placement Coordinator</div>
-          <ul class="exp-bullets">
-            <li>Coordinated placement activities for the Training & Placement Cell</li>
-            <li>Managed Capgemini Orientation Session logistics and student communication</li>
-          </ul>
-        </div>
+      <div class="copy-block reveal">
+        <p>I am a Computer Science student at Sandip University, Nashik, focused on backend systems, clean architecture, and autonomous systems.</p>
+        <p>I care about building things that actually work: production-grade, maintainable, and well-thought-out. From drone mission frameworks to self-hosted infrastructure, I prefer to understand systems deeply rather than skim the surface.</p>
+        <p>Beyond code, I lead communities, organize large-scale technical events, and build automation pipelines that save real time for real people.</p>
       </div>
-    </div>
-  </div>
-</div>
- 
-<div class="section-full" id="projects">
-  <div class="section-inner">
-    <div class="section-header fade-in"><span class="section-num">03</span><h2>Projects</h2></div>
-    <div class="proj-grid fade-in">
-      <a href="https://github.com/saikannadkar/Drona" target="_blank" class="proj-card">
-        <div class="proj-num">001</div>
-        <div class="proj-name">Drona</div>
-        <div class="proj-highlight">Production-grade autonomous drone framework</div>
-        <div class="proj-desc">Modular framework for autonomous drone mission management with a centralized Mission Manager coordinating planning, docking, and health monitoring. Hardware-independent via abstraction layers enabling seamless integration with MAVLink and VICON.</div>
-        <div class="proj-footer">
-          <div class="tags"><span class="tag">Python</span><span class="tag">System Design</span><span class="tag">MAVLink</span><span class="tag">Pytest</span></div>
-          <span class="proj-arrow">↗</span>
+    </section>
+
+    <section class="section-shell" id="experience">
+      <div class="section-label reveal">
+        <span>02</span>
+        <h2>Experience</h2>
+      </div>
+      <div class="timeline">
+        <article class="timeline-card reveal">
+          <div class="time">Dec 2025 - Present</div>
+          <div>
+            <h3>Core Team - Founder's Office</h3>
+            <p>Voxel Networks</p>
+            <ul>
+              <li>Led execution of operations and marketing initiatives improving engagement and outreach.</li>
+              <li>Built and optimized internal workflows for faster execution and team coordination.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="timeline-card reveal">
+          <div class="time">Mar 2025 - Present</div>
+          <div>
+            <h3>Community Lead &amp; Organizer</h3>
+            <p>SECT India</p>
+            <ul>
+              <li>Scaled community engagement through events and initiatives reaching 1000+ students.</li>
+              <li>Organized and managed large-scale technical events and hackathons.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="timeline-card reveal">
+          <div class="time">May 2025</div>
+          <div>
+            <h3>Training &amp; Placement Coordinator</h3>
+            <p>Sandip University</p>
+            <ul>
+              <li>Coordinated placement activities for the Training &amp; Placement Cell.</li>
+              <li>Managed Capgemini Orientation Session logistics and student communication.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell" id="projects">
+      <div class="section-label reveal">
+        <span>03</span>
+        <h2>Project</h2>
+      </div>
+      <a class="project-feature reveal" href="https://github.com/saikannadkar/Drona" target="_blank" rel="noreferrer">
+        <div>
+          <span class="project-index">001</span>
+          <h3>Drona</h3>
+          <p class="project-tagline">Production-grade autonomous drone framework</p>
+          <p>Modular framework for autonomous drone mission management with a centralized Mission Manager coordinating planning, docking, and health monitoring. Hardware-independent via abstraction layers enabling seamless integration with MAVLink and VICON.</p>
+        </div>
+        <div class="project-stack" aria-label="Drona technology stack">
+          <span>Python</span>
+          <span>System Design</span>
+          <span>MAVLink</span>
+          <span>Pytest</span>
         </div>
       </a>
-    </div>
-  </div>
-</div>
- 
-<div class="section-full" id="skills">
-  <div class="section-inner">
-    <div class="section-header fade-in"><span class="section-num">04</span><h2>Skills</h2></div>
-    <div class="skills-layout">
-      <div class="skills-intro fade-in">Tools and technologies I work with. I prefer understanding things deeply over collecting buzzwords.</div>
-      <div class="skills-groups fade-in">
-        <div class="skill-group">
-          <div class="skill-group-label">Languages</div>
-          <div class="skill-items"><span class="skill-chip">Python</span><span class="skill-chip">Java</span><span class="skill-chip">C++</span><span class="skill-chip">TypeScript</span></div>
+    </section>
+
+    <section class="section-shell" id="skills">
+      <div class="section-label reveal">
+        <span>04</span>
+        <h2>Skills</h2>
+      </div>
+      <div class="skill-orbit reveal" aria-label="Skills">
+        <div>
+          <span>Languages</span>
+          <p>Python, Java, C++, TypeScript</p>
         </div>
-        <div class="skill-group">
-          <div class="skill-group-label">Web</div>
-          <div class="skill-items"><span class="skill-chip">React</span><span class="skill-chip">Next.js</span><span class="skill-chip">REST APIs</span><span class="skill-chip">Tailwind</span></div>
+        <div>
+          <span>Web</span>
+          <p>React, Next.js, REST APIs, Tailwind</p>
         </div>
-        <div class="skill-group">
-          <div class="skill-group-label">Databases</div>
-          <div class="skill-items"><span class="skill-chip">PostgreSQL</span><span class="skill-chip">MongoDB</span><span class="skill-chip">Prisma ORM</span></div>
+        <div>
+          <span>Databases</span>
+          <p>PostgreSQL, MongoDB, Prisma ORM</p>
         </div>
-        <div class="skill-group">
-          <div class="skill-group-label">Concepts</div>
-          <div class="skill-items"><span class="skill-chip">System Design</span><span class="skill-chip">OOP</span><span class="skill-chip">Clean Arch</span><span class="skill-chip">DSA</span></div>
+        <div>
+          <span>Concepts</span>
+          <p>System Design, OOP, Clean Architecture, DSA</p>
         </div>
-        <div class="skill-group">
-          <div class="skill-group-label">Infra & Tools</div>
-          <div class="skill-items"><span class="skill-chip">Docker</span><span class="skill-chip">Linux/VPS</span><span class="skill-chip">Git</span><span class="skill-chip">GitHub Actions</span><span class="skill-chip">Nginx</span></div>
+        <div>
+          <span>Infra &amp; Tools</span>
+          <p>Docker, Linux/VPS, Git, GitHub Actions, Nginx</p>
         </div>
-        <div class="skill-group">
-          <div class="skill-group-label">CS Core</div>
-          <div class="skill-items"><span class="skill-chip">OS</span><span class="skill-chip">DBMS</span><span class="skill-chip">Networks</span></div>
+        <div>
+          <span>CS Core</span>
+          <p>OS, DBMS, Networks</p>
         </div>
       </div>
-    </div>
-  </div>
-</div>
- 
-<div class="section-full" id="contact">
-  <div class="section-inner">
-    <div class="section-header fade-in"><span class="section-num">05</span><h2>Contact</h2></div>
-    <div class="contact-layout">
-      <div class="fade-in">
-        <div class="contact-intro">Let's build something worth building.</div>
-        <div class="contact-sub">Open to internships, collaborations, and interesting problems. If you're working on something that matters, reach out.</div>
+    </section>
+
+    <section class="section-shell contact-section" id="contact">
+      <div class="section-label reveal">
+        <span>05</span>
+        <h2>Contact</h2>
       </div>
-      <div class="contact-links fade-in">
-        <a href="mailto:saikannadkar@gmail.com" class="contact-link">
-          <div><div class="contact-link-label">Email</div><div class="contact-link-value">saikannadkar@gmail.com</div></div>
-          <span class="contact-link-arrow">↗</span>
-        </a>
-        <a href="https://linkedin.com/in/saikannadkar" target="_blank" class="contact-link">
-          <div><div class="contact-link-label">LinkedIn</div><div class="contact-link-value">linkedin.com/in/saikannadkar</div></div>
-          <span class="contact-link-arrow">↗</span>
-        </a>
-        <a href="https://github.com/saikannadkar" target="_blank" class="contact-link">
-          <div><div class="contact-link-label">GitHub</div><div class="contact-link-value">github.com/saikannadkar</div></div>
-          <span class="contact-link-arrow">↗</span>
-        </a>
-        <a href="tel:+917219122480" class="contact-link">
-          <div><div class="contact-link-label">Phone</div><div class="contact-link-value">+91 72191 22480</div></div>
-          <span class="contact-link-arrow">↗</span>
-        </a>
+      <div class="contact-grid">
+        <div class="contact-copy reveal">
+          <p>Let's build something worth building.</p>
+          <span>Open to internships, collaborations, and interesting problems. If you are working on something that matters, reach out.</span>
+        </div>
+        <div class="contact-links reveal">
+          <a href="mailto:saikannadkar@gmail.com"><span>Email</span>saikannadkar@gmail.com</a>
+          <a href="https://linkedin.com/in/saikannadkar" target="_blank" rel="noreferrer"><span>LinkedIn</span>linkedin.com/in/saikannadkar</a>
+          <a href="https://github.com/saikannadkar" target="_blank" rel="noreferrer"><span>GitHub</span>github.com/saikannadkar</a>
+          <a href="tel:+917219122480"><span>Phone</span>+91 72191 22480</a>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
- 
-<footer>
-  <div class="footer-left">© 2026 Sai Kannadkar. All rights reserved.</div>
-  <div class="footer-right">
-    <a href="https://github.com/saikannadkar" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/saikannadkar" target="_blank">LinkedIn</a>
-    <a href="https://n8n.saikannadkar.me" target="_blank">n8n</a>
-  </div>
-</footer>
- 
-<script src="main.js"></script>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>&copy; 2026 Sai Kannadkar</span>
+    <span>Nashik, India / CSE '27</span>
+  </footer>
+
+  <script src="main.js"></script>
 </body>
 </html>
