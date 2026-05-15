@@ -22,10 +22,10 @@ jobs:
 
       - name: Validate JavaScript
         run: node --check main.js
-
+ 
       - name: Run portfolio tests
         run: node .github/tests/test.html.js
-
+ 
   deploy:
     runs-on: ubuntu-latest
     needs: test
@@ -50,7 +50,6 @@ jobs:
             git clone --depth 1 https://github.com/saikannadkar/portfolio.git portfolio_temp
             echo "Clone successful, files:"
             ls /tmp/portfolio_temp/
-            sudo rsync -a --delete --exclude='.git' --exclude='.github' /tmp/portfolio_temp/ /var/www/portfolio/
-            sudo chown -R www-data:www-data /var/www/portfolio/
+            rsync -a --delete --exclude='.git' --exclude='.github' /tmp/portfolio_temp/ /var/www/portfolio/
             rm -rf /tmp/portfolio_temp
             echo "Deployed successfully"
