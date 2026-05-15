@@ -42,12 +42,15 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 2222
           script: |
+            set -e
+            export PATH=$PATH:/usr/bin:/usr/local/bin
+            echo "Starting deploy..."
             cd /tmp
             rm -rf portfolio_temp
             git clone --depth 1 https://github.com/saikannadkar/portfolio.git portfolio_temp
-            sudo cp /tmp/portfolio_temp/index.html /var/www/portfolio/index.html
-            sudo cp /tmp/portfolio_temp/style.css /var/www/portfolio/style.css
-            sudo cp /tmp/portfolio_temp/main.js /var/www/portfolio/main.js
-            sudo chown www-data:www-data /var/www/portfolio/index.html /var/www/portfolio/style.css /var/www/portfolio/main.js
+            echo "Clone successful, files:"
+            ls /tmp/portfolio_temp/
+            sudo rsync -a --delete --exclude='.git' --exclude='.github' /tmp/portfolio_temp/ /var/www/portfolio/
+            sudo chown -R www-data:www-data /var/www/portfolio/
             rm -rf /tmp/portfolio_temp
             echo "Deployed successfully"
