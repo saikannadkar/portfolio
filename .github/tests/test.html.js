@@ -40,7 +40,7 @@ test('has experience section', html.includes('id="experience"'));
 test('has projects section', html.includes('id="projects"'));
 test('has skills section', html.includes('id="skills"'));
 test('has contact section', html.includes('id="contact"'));
-test('has resume download link', html.includes('Sai_Kannadkar_Resume.pdf'));
+test('has resume download link', html.includes('Resume_Sai_Kannadkar.pdf'));
 test('has GitHub link', html.includes('github.com/saikannadkar'));
 test('has LinkedIn link', html.includes('linkedin.com/in/saikannadkar'));
 test('has email link', html.includes('saikannadkar@gmail.com'));
