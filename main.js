@@ -229,3 +229,182 @@ window.addEventListener('scroll', () => {
 [30000, 60000].forEach(ms => {
   setTimeout(() => gtrack('time_on_page', { seconds: ms / 1000, ...getUTM() }), ms);
 });
+
+// ── Scroll Progress Bar ───────────────────────────────────────────────────────
+const progressBar = document.createElement('div');
+progressBar.className = 'scroll-progress';
+document.body.prepend(progressBar);
+ 
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  progressBar.style.transform = `scaleX(${pct})`;
+}, { passive: true });
+ 
+// ── Custom Cursor (desktop only) ──────────────────────────────────────────────
+if (window.matchMedia('(hover: hover)').matches && !prefersReducedMotion) {
+  const cursor = document.createElement('div');
+  cursor.className = 'custom-cursor';
+  document.body.appendChild(cursor);
+ 
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+ 
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+  });
+}
+ 
+// ── Hero Headline Word Reveal ─────────────────────────────────────────────────
+(function initHeadline() {
+  const headline = document.querySelector('.headline');
+  if (!headline) return;
+  headline.querySelectorAll('span').forEach((span, i) => {
+    const word = span.textContent;
+    span.innerHTML = `<span class="headline-word" style="transition-delay:${0.1 + i * 0.15}s">${word}</span>`;
+  });
+  setTimeout(() => {
+    headline.querySelectorAll('.headline-word').forEach(w => w.classList.add('is-visible'));
+  }, 200);
+})();
+ 
+// ── Kicker Text Reveal ────────────────────────────────────────────────────────
+(function initKicker() {
+  const kicker = document.querySelector('.kicker');
+  if (!kicker) return;
+  const text = kicker.textContent;
+  kicker.innerHTML = `<span class="kicker-inner">${text}</span>`;
+  setTimeout(() => {
+    kicker.querySelector('.kicker-inner').classList.add('is-visible');
+  }, 100);
+})();
+ 
+// ── Metric Counter Animation ──────────────────────────────────────────────────
+function animateCounter(el, target, suffix, duration = 1200) {
+  const start = performance.now();
+  function update(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(target * eased).toLocaleString() + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+ 
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const strong = entry.target.querySelector('strong');
+    if (!strong) return;
+    const raw = strong.textContent.trim();
+    const num = parseInt(raw.replace(/[^0-9]/g, ''));
+    const suffix = raw.replace(/[0-9,]/g, '');
+    if (!isNaN(num)) animateCounter(strong, num, suffix);
+    counterObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.5 });
+ 
+document.querySelectorAll('.metric-grid div').forEach(d => counterObserver.observe(d));
+ 
+// ── Magnetic Buttons ──────────────────────────────────────────────────────────
+document.querySelectorAll('.primary-btn, .ghost-btn').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    btn.style.transform = `translate(${x * 0.12}px, ${y * 0.2}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+  });
+});
+ 
+// ── Staggered Timeline Cards ──────────────────────────────────────────────────
+document.querySelectorAll('.timeline-card').forEach((card, i) => {
+  card.style.transitionDelay = `${i * 80}ms`;
+});
+ 
+// ── Reveal Left/Right for Split Sections ─────────────────────────────────────
+document.querySelectorAll('.section-label').forEach(el => {
+  el.classList.add('reveal-left');
+  revealObserver.observe(el);
+});
+ 
+document.querySelectorAll('.copy-block').forEach(el => {
+  el.classList.add('reveal-right');
+  revealObserver.observe(el);
+});
+ 
+// ── GA4 Analytics ─────────────────────────────────────────────────────────────
+function gtrack(eventName, params) {
+  if (typeof gtag === 'undefined') return;
+  gtag('event', eventName, params);
+}
+ 
+(function captureUTM() {
+  const params = new URLSearchParams(window.location.search);
+  const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  const utm = {};
+  utmKeys.forEach(k => { if (params.get(k)) utm[k] = params.get(k); });
+  if (Object.keys(utm).length) {
+    sessionStorage.setItem('utm', JSON.stringify(utm));
+    gtrack('utm_visit', utm);
+  }
+})();
+ 
+function getUTM() {
+  try { return JSON.parse(sessionStorage.getItem('utm') || '{}'); } catch { return {}; }
+}
+ 
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    const href = link.getAttribute('href') || '';
+    const text = link.textContent.trim();
+    if (href.includes('Resume') || href.includes('.pdf')) {
+      gtrack('resume_download', { ...getUTM() });
+    } else if (href.startsWith('mailto:')) {
+      gtrack('email_click', { email: href.replace('mailto:', ''), ...getUTM() });
+    } else if (href.startsWith('tel:')) {
+      gtrack('phone_click', { ...getUTM() });
+    } else if (href.includes('linkedin.com')) {
+      gtrack('linkedin_click', { ...getUTM() });
+    } else if (href.includes('github.com')) {
+      gtrack('github_click', { link_text: text, ...getUTM() });
+    } else if (href.includes('n8n.saikannadkar')) {
+      gtrack('n8n_click', { ...getUTM() });
+    } else if (href.startsWith('#')) {
+      gtrack('nav_click', { section: href.replace('#', ''), ...getUTM() });
+    }
+  });
+});
+ 
+const sectionNames = { about: 'About', experience: 'Experience', projects: 'Projects', skills: 'Skills', contact: 'Contact' };
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const id = entry.target.id;
+    if (sectionNames[id]) {
+      gtrack('section_view', { section: sectionNames[id], ...getUTM() });
+      sectionObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.4 });
+ 
+document.querySelectorAll('section[id]').forEach(s => sectionObserver.observe(s));
+ 
+const scrollDepths = new Set();
+window.addEventListener('scroll', () => {
+  const pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+  [25, 50, 75, 100].forEach(d => {
+    if (pct >= d && !scrollDepths.has(d)) {
+      scrollDepths.add(d);
+      gtrack('scroll_depth', { depth: d, ...getUTM() });
+    }
+  });
+}, { passive: true });
+ 
+[30000, 60000].forEach(ms => {
+  setTimeout(() => gtrack('time_on_page', { seconds: ms / 1000, ...getUTM() }), ms);
+});
