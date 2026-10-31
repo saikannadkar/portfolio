@@ -1,0 +1,23 @@
+# Sai Kannadkar
+
+> Sai Kannadkar’s personal portfolio. Agentic AI Engineer and Backend Developer focused on intelligent, reliable, and scalable systems. Open to AI/ML engineering roles and internships.
+
+## Portfolio
+
+- [Home](https://saikannadkar.me/): Biography, selected projects, and contact information.
+- [Skills](https://saikannadkar.me/skills): Frontend and backend development, styling, cloud deployment, testing, programming languages, databases, version control, and computer science.
+- [Experience](https://saikannadkar.me/experience): Roles at Voxel Networks, SECT India, and Sandip University, with dates and responsibilities.
+- [Résumé](https://saikannadkar.me/Resume_Sai_Kannadkar.pdf): The résumé preserved from the previous portfolio; consult the document for its contents and dates.
+
+## Selected projects
+
+- [Drona](https://github.com/saikannadkar/Drona): An autonomous GPS-independent drone project.
+- [SUN CLUBS](https://sun-clubs.netlify.app/): SUN CLUBS website.
+
+## Profiles and contact
+
+- [GitHub](https://github.com/saikannadkar): Public repositories.
+- [LinkedIn](https://www.linkedin.com/in/saikannadkar/): Professional profile.
+- [Email](mailto:hey@saikannadkar.me): Collaboration and opportunities.
+
+The portfolio pages and linked project repositories are the primary sources for claims about this work. This file summarizes those sources; it does not assert additional credentials or project results.
