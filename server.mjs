@@ -14,7 +14,7 @@ export function createPreviewServer(root) {
     catch { response.writeHead(400).end('Bad request'); return; }
     const aliases = { '/index.html': '/', '/index': '/', '/skills.html': '/skills', '/skills/': '/skills', '/experience.html': '/experience', '/experience/': '/experience' };
     if (aliases[pathname]) { response.writeHead(308, { Location: aliases[pathname] + new URL(request.url, 'http://localhost').search }).end(); return; }
-    const file = pathname === '/' ? 'index.html' : pathname === '/skills' ? 'skills.html' : pathname === '/experience' ? 'experience.html' : pathname.slice(1);
+    const file = pathname === '/' ? 'index.html' : pathname === '/skills' ? 'skills.html' : pathname === '/experience' ? 'experience.html' : pathname === '/Resume_Sai_Kannadkar' ? 'Resume_Sai_Kannadkar.pdf' : pathname.slice(1);
     const allowed = publicFiles.has(file) || /^assets\/[a-zA-Z0-9_-]+\.(?:svg|jpg|png)$/.test(file);
     try {
       if (!allowed) throw Object.assign(new Error('Not found'), { code: 'ENOENT' });

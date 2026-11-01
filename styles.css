@@ -15,3 +15,67 @@
 .skill-icon,.about-icon,.project-arrow{display:flex;align-items:center;justify-content:center}.skill-icon img,.about-icon img,.project-arrow img{flex-shrink:0}
 @media(max-width:800px){.icon-row{gap:2vw}.skill-icon{width:min(64px,16vw);height:min(64px,16vw)}.skill-icon img{transform:scale(calc(min(64px,16vw) / 100px))}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Experience uses the Skills card surface on both pages. */
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 1.04vw, 24px);
+}
+.experience-card { color: #fff; }
+.experience-card .experience-date {
+  display: inline-block;
+  background: #141414;
+  border-radius: 999px;
+  padding: .55em 1em;
+  font-size: clamp(13px, 1.04vw, 20px);
+}
+.experience-card h2, .experience-card h3 {
+  margin: 1em 0 .35em;
+  font: 500 clamp(21px, 1.46vw, 32px)/1.3 'DM Sans', sans-serif;
+}
+.experience-card .experience-company {
+  color: #fff;
+  font-size: clamp(16px, 1.15vw, 24px);
+}
+.experience-card .experience-summary, .experience-card ul {
+  margin: 1.4em 0 0;
+  color: #aaa;
+  font-size: clamp(15px, 1.04vw, 22px);
+  font-weight: 300;
+  line-height: 1.5;
+}
+.experience-card ul { padding-left: 1.2em; }
+.experience-card li + li { margin-top: .6em; }
+.experience-link { margin-top: 1.3em; }
+@media (max-width: 800px) {
+  .experience-grid { grid-template-columns: 1fr; gap: 18px; }
+}
+
+.resume-action {
+  display: flex;
+  justify-content: center;
+  padding-block: 0 clamp(36px, 4vw, 76px);
+}
+.resume-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 1em;
+  padding: .85em 1.5em;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font: 500 clamp(16px, 1.15vw, 22px)/1.3 'DM Sans', sans-serif;
+  text-decoration: none;
+}
+.resume-download:hover { text-decoration: underline; }
+.experience-grid + .resume-action {
+  padding-block: clamp(24px, 2vw, 40px) 0;
+}
+.work-section:has(> .project-resume) {
+  padding-bottom: 0;
+}
+.project-resume {
+  align-items: center;
+  min-height: max(80px, 5.208333vw);
+  padding: 0;
+}

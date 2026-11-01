@@ -13,7 +13,7 @@ test('Vercel publishes static output without a catch-all homepage rewrite', asyn
   assert.equal(config.outputDirectory, 'dist');
   assert.equal(config.cleanUrls, true);
   assert.equal(config.trailingSlash, false);
-  assert.equal(config.rewrites, undefined);
+  assert.deepEqual(config.rewrites, [{ source: '/Resume_Sai_Kannadkar', destination: '/Resume_Sai_Kannadkar.pdf' }]);
   assert.ok(config.redirects.some(rule => rule.source === '/index' && rule.destination === '/' && rule.permanent));
 });
 
@@ -35,6 +35,10 @@ test('HTTP routes, redirects, real 404s and source-file protection', async t => 
   for (const path of ['/missing', '/.git/config', '/server.mjs', '/package.json', '/assets/..%5cpackage.json']) assert.equal((await fetch(base + path)).status, 404, path);
   assert.equal((await fetch(base + '/%zz')).status, 400);
   assert.equal((await fetch(base + '/', { method: 'POST' })).status, 405);
+  const resume = await fetch(base + '/Resume_Sai_Kannadkar');
+  assert.equal(resume.status, 200);
+  assert.equal(resume.headers.get('content-type'), 'application/pdf');
+  assert.deepEqual(Buffer.from(await resume.arrayBuffer()), await readFile('Resume_Sai_Kannadkar.pdf'));
   const head = await fetch(base + '/skills', { method: 'HEAD' });
   assert.equal(head.status, 200);
   assert.equal(await head.text(), '');

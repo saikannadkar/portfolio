@@ -9,6 +9,9 @@
     { "source": "/index", "destination": "/", "permanent": true },
     { "source": "/:path*", "has": [{ "type": "host", "value": "www.saikannadkar.me" }], "destination": "https://saikannadkar.me/:path*", "permanent": true }
   ],
+  "rewrites": [
+    { "source": "/Resume_Sai_Kannadkar", "destination": "/Resume_Sai_Kannadkar.pdf" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
